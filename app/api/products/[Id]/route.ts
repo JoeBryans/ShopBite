@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import db from '@/lib/db';
-import { Product } from "@prisma/client";
 
 export async function GET( {params}:any) {
     const id= params
