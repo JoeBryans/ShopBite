@@ -4,7 +4,6 @@ import db from "@/lib/db"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
 import { Order } from "@prisma/client"
-import exp from "constants"
 
 
 export async function POST(req: Request) {
@@ -36,7 +35,7 @@ export async function POST(req: Request) {
         });
           console.log("orders payment api:",payment);
           
-            const order:Order = await db.order.create({
+             await db.order.create({
                 data: {
                 total_qty :body.totalquantity,   
                 total_price:body.total,     
@@ -46,8 +45,7 @@ export async function POST(req: Request) {
                     paymentIntentId: payment.id
                 }
             })
-        // console.log(order)
-       console.log(payment.client_secret)
+      //  console.log(payment.client_secret)
        return NextResponse.json({clientSecret:payment.client_secret})
     } 
     catch (error) {
@@ -56,13 +54,7 @@ export async function POST(req: Request) {
     }
 }
 
-export async function GET(req: Request) {
-  //  const session =await getServerSession(authOptions) 
-  // const userId = session?.user?.id
-  // if (!userId) {
-  //   return NextResponse.json({ message: "User not found" }, { status: 404 });
-  // }
-  // pepped-nicely-cure-thrive
+export async function GET() {
 
   try {
     const order = await db.order.findMany({ });
