@@ -19,7 +19,8 @@ import { ArrowBigLeft } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/hooks/store/store";
 import { ShoppingBasketIcon } from "lucide-react";
-import { CartItem } from "@/hooks/store/cartSlice";
+import { Product } from "@/typing";
+// import { CartItem } from "@/hooks/store/cartSlice";
 export function CartBar() {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   const total = cartItems.reduce((acc, item) => acc + item.qty, 0);
@@ -40,30 +41,23 @@ export function CartBar() {
         <SheetHeader>
           <SheetTitle>Your Cart</SheetTitle>
           <SheetDescription>
-       
             <div className="font-semibold text-xl">
-            You have   <span>{cartItems.length}</span> Items in Your Cart!
+              You have <span>{cartItems.length}</span> Items in Your Cart!
             </div>
-          
           </SheetDescription>
         </SheetHeader>
         <div className="">
-          {
-            cartItems.slice(0,3).map((item:CartItem,index:number)=>{
-            return(<CartItems key={index} Items={item} />
-          )})}
-         
+          {cartItems.slice(0, 3).map((item: Product, index: number) => {
+            return <CartItems key={index} Items={item} />;
+          })}
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            {
-              cartItems.length>0?(
-                <Link href={"/cart"} className=" text-blue-600">
-              Veiw all cart Items
-            </Link>
-              ):null
-
-            }
+            {cartItems.length > 0 ? (
+              <Link href={"/cart"} className=" text-blue-600">
+                Veiw all cart Items
+              </Link>
+            ) : null}
           </SheetClose>
         </SheetFooter>
       </SheetContent>

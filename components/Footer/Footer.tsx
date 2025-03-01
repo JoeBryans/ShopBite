@@ -4,9 +4,9 @@ import { Label } from "../ui/label";
 import { Facebook, Instagram, LinkedinIcon, Twitter } from "lucide-react";
 const Footer = () => {
   return (
-    <div className="bg-slate-500 w-screen min-h-20 z-40 ">
+    <div className="bg-slate-500  w-screen min-h-20 z-40  text-slate-200">
       <div className="max-w-[80rem]  w-[90%] flex flex-col mx-auto mt-5">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4">
           <div>
             <h4 className="text-2xl font-bold">ABOUT SHOPBITE </h4>
             <ul>
@@ -68,14 +68,14 @@ const Footer = () => {
           <div>
             <Label
               htmlFor="email"
-              className="flex items-center py-1  border-2  rounded-lg bg-white mb-3"
+              className="flex items-center justify-between py-1  border-2  rounded-lg bg-white mb-3"
             >
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="p-2 w-[150px] max-w-[250px] border-0 focus:outline-0"
+                className="p-2 w-[95%] max-w-[250px] text-muted-foreground border-0 focus:outline-0"
               />
-              <button className="p-2  bg-blue-500 hover:bg-white text-white hover:text-blue-500 hover:border-blue-500 hover:border-2 font-semibold transition:all w-max">
+              <button className="p-2 rounded-lg bg-blue-500 hover:bg-white text-white hover:text-blue-500 hover:border-blue-500 hover:border-2 font-semibold transition:all w-max">
                 Subscribe
               </button>
             </Label>

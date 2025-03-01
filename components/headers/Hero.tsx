@@ -30,7 +30,13 @@ const Hero = () => {
         </div>
       </div>
       {/* Image */}
-      <Image src={ "/shopCart.jpg"} alt="" width={300} height={300} className="mt-"/>
+      <Image
+        src={"/shopCart.jpg"}
+        alt=""
+        width={300}
+        height={300}
+        className="mt-"
+      />
     </div>
   );
 };

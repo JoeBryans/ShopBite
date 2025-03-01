@@ -14,10 +14,10 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
   name      String
   image     String?
   phone     String
@@ -25,7 +25,7 @@ model User {
   accounts  Account[]
   products  Product[]
   sessions  Session[]
-  cart      Cart[]
+  cart      CartItem[]
   orders    Order[]
   address   Address[]
   payment   Payment[]
@@ -74,14 +74,16 @@ model Product {
   discount_pecent    Int?
   brand              String?
   slug               String?
+  sku                String?
   category           String?
-  description        Json
+  description        String?    @db.Text
+  overview           Json
   warranty           String?    @db.Text
+  shippingInfo       String?    @db.Text
   image              Json?
   color              String?
   colors             Json?
   size               String?
-  // rating Int
   qty                Int        @default(1)
   userId             String
   user               User       @relation(fields: [userId], references: [id])
@@ -117,19 +119,14 @@ model Order {
   createAt        DateTime  @default(now())
 }
 
-model Cart {
-  id       String     @id @default(cuid())
-  userId   String     @unique
-  user     User       @relation(fields: [userId], references: [id])
-  cartItem CartItem[]
-}
-
 model CartItem {
   id         String  @id @default(cuid())
-  carts      Cart[]
+  userId     String  @unique
+  user       User    @relation(fields: [userId], references: [id])
   productId  String
   product    Product @relation(fields: [productId], references: [id])
-  totalQty   Int
+  qty        Int
+  price      Int
   totalPrice Int
 }
 

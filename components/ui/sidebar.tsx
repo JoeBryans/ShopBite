@@ -236,7 +236,7 @@ const Sidebar = React.forwardRef<
         {/* Styling the sidebar component */}
         <div
           className={cn(
-            "fixed inset-y-20 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex",
+            "absolute inset-y-20 z-10 hidden h-[100vh] max-w-44 w-[90%] transition-[left,right,width] duration-200 ease-linear md:flex",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:w-[2.5rem]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
@@ -273,14 +273,13 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-10 mx-5 fixed z-20", className)}
+      className={cn("h-7 w-10 mx-24 absolute z-20", className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
       }}
       {...props}
     >
-      {/* <PanelLeft /> */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -294,6 +293,7 @@ const SidebarTrigger = React.forwardRef<
           d="M4 6h16M4 12h16M4 18h16"
         ></path>
       </svg>
+
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );

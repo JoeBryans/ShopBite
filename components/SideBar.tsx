@@ -71,7 +71,7 @@ const items = [
 
 const SideBar = () => {
   return (
-    <div className="flex flex-col border-0 overflow-hidden  bg-blue-500 w-64">
+    <div className="flex flex-col border-0 overflow-hidden  bg-blue-500 w-44">
       <Sidebar className="border-0">
         <SidebarContent>
           <SidebarGroup>

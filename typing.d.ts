@@ -7,23 +7,26 @@ export type Product={
     quantity:number,
     qty:number,
     image:[{url:string}],
+    images:[string],
     description:string, 
     category:string,
     brand:string,
     discount:number,
-    discountType:string,
+    discountPercentage:string,
+    stock:number,
     tax:number,
     taxType:string, 
     shipping:number,
-    shippingType:string,
+    shippingInformation:string,
+    warrantyInformation:string,
     total:number,   
-    status:string,
+    availabilityStatus:string,
     createdAt:string,
     updatedAt:string,
-    rating:{
-        rate:number,
-        count:number
-    }
+    rating:number
+    reviews: [any]
+    returnPolicy: string,
+    dimensions:[any]
     
 }
 

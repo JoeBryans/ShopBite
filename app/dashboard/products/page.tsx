@@ -21,12 +21,12 @@ const page = () => {
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="relative">
                 {/* row 1 */}
                 {[1, 2, 3, 4, 5].map((item: number, index: number) => {
                   return (
                     <>
-                      <tr key={index}>
+                      <tr key={index} className="h-20 py-2 ">
                         <td>
                           <div className="flex items-center gap-3">
                             <div className="avatar">

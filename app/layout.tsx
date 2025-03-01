@@ -5,6 +5,8 @@ import NavBar from "@/components/headers/NavBar";
 import Providers from "./provider";
 import Footer from "@/components/Footer/Footer";
 import Head from "next/head";
+import Navigator from "@/components/headers/Navigator";
+import { Session } from "./session";
 
 // import {  ClerkProvider,} from '@clerk/nextjs'
 const geistSans = Geist({
@@ -29,20 +31,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>  
-          {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
-          <link rel="icon" href="/favicon.png" sizes="32x32" />
- </Head>
-      <Providers> 
-        <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="w-screen ">
-        <NavBar/>
-        </div>
-      <main className="py-4 mb-20"> {children}</main>
-      <Footer/>
-      </body> </Providers>
+      <Head>
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
+        <link rel="icon" href="/favicon.png" sizes="32x32" />
+      </Head>
+      <Providers>
+        <Session>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <div className="w-screen ">
+              <NavBar />
+            </div>
+            {/* <Toaster/> */}
+            <main className="py-4 mb-20"> {children}</main>
+
+            <Footer />
+          </body>
+        </Session>
+      </Providers>
     </html>
   );
 }

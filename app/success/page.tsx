@@ -1,8 +1,19 @@
-import React from "react";
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { use, useEffect } from "react";
 
 const SuccessPage = () => {
+  const router = useRouter();
+  useEffect(() => {
+    // localStorage.removeItem("cartItems");
+    // localStorage.removeItem("shippinInfo");
+    // localStorage.removeItem("clientSecret");
+    localStorage.clear();
+    router.refresh();
+  }, []);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="bg-white p-8 rounded-lg shadow-lg text-center">
         <svg
           className="w-16 h-16 mx-auto mb-4 text-green-500"
@@ -24,12 +35,12 @@ const SuccessPage = () => {
         <p className="text-gray-600 mb-6">
           Thank you for your purchase. Your payment was successful.
         </p>
-        <a
+        <Link
           href="/"
-          className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+          className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
         >
           Go to Homepage
-        </a>
+        </Link>
       </div>
     </div>
   );

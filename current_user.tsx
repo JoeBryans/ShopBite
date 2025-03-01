@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import {
   CreditCard,
+  LayoutDashboard,
   Settings,
   User2,
   UserCheck,
@@ -25,7 +26,7 @@ import {
 import Link from "next/link";
 import { SignOut } from "./components/headers/SignOut";
 
-export const GetUser = async () => {
+export const GetUser = async ({ role }: any) => {
   const session = await getServerSession(authOptions);
   console.log(session?.user);
   const currenUser = session?.user;
@@ -53,15 +54,28 @@ export const GetUser = async () => {
                   </Link>
                 </DropdownMenuShortcut>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                Orders
-                <DropdownMenuShortcut>
-                  {" "}
-                  <Link href={""}>
-                    <CreditCard />
-                  </Link>
-                </DropdownMenuShortcut>
-              </DropdownMenuItem>
+              {role === "seller" ? (
+                <DropdownMenuItem>
+                  Dashboard
+                  <DropdownMenuShortcut>
+                    {" "}
+                    <Link href={"/dashboard"}>
+                      <LayoutDashboard />
+                    </Link>
+                  </DropdownMenuShortcut>
+                </DropdownMenuItem>
+              ) : (
+                <DropdownMenuItem>
+                  Orders
+                  <DropdownMenuShortcut>
+                    {" "}
+                    <Link href={""}>
+                      <CreditCard />
+                    </Link>
+                  </DropdownMenuShortcut>
+                </DropdownMenuItem>
+              )}
+
               <DropdownMenuItem>
                 Settings
                 <DropdownMenuShortcut>

@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  CartItem,
   ShippingAddress,
   addShippinAddress,
   addToCart,
@@ -16,8 +15,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { RootState } from "@/hooks/store/store";
 import { log } from "console";
-import { DeleteIcon } from "lucide-react";
 import { Product } from "@/typing";
+import { Trash2Icon } from "lucide-react";
 type props = {
   items: Product;
 };
@@ -43,7 +42,7 @@ export const AddButton = ({ items }: props) => {
     </Button>
   );
 };
-export const DeleteButton = (items: any) => {
+export const DeleteButton = (items: Product) => {
   const dispatch = useDispatch();
 
   const DeleteFromCart = (id: any) => {
@@ -51,11 +50,11 @@ export const DeleteButton = (items: any) => {
   };
 
   return (
-    <DeleteIcon
+    <Trash2Icon
       size={30}
       color="red"
       className="cursor-pointer"
-      onClick={() => DeleteFromCart(items.id)}
+      onClick={() => DeleteFromCart(items)}
     />
   );
 };

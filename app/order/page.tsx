@@ -3,16 +3,17 @@ import Container from "@/components/Container";
 import { RootState } from "@/hooks/store/store";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { CartItem } from "@/hooks/store/cartSlice";
+// import { CartItem } from "@/hooks/store/cartSlice";
 import CartCard from "@/components/Cart/CartItems";
 import { ClearButton, CheckOutButton } from "@/components/Cart/cartButton";
 import Link from "next/link";
 import OrderItems from "@/components/Order/order";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Product } from "@/typing";
 
 const page = () => {
-  const cartItems: CartItem[] = useSelector(
+  const cartItems: Product[] = useSelector(
     (state: RootState) => state.cart.cartItems
   );
   let orderItems = [];
@@ -24,9 +25,11 @@ const page = () => {
     (state: RootState) => state.cart.shippinInfo
   );
   const total = cartItems.reduce(
-    (acc, item) => acc + item.qty * parseInt(item.price, 10),
+    (acc, item) => acc + item.qty * Math.floor(item.price),
     0
   );
+
+  // const total = cartItems.reduce((acc, item) => acc + item.qty * item.price, 0);
   const totalquantity = cartItems.reduce((acc, item) => acc + item.qty, 0);
   console.log(shippingAddress);
 
@@ -68,7 +71,7 @@ const page = () => {
         <div className="flex flex-col h-max gap-5 max-w-[600px] w-[90%]  mx-auto p-4">
           <div className="w-full flex flex-col shadow-lg">
             <h3>Cart Item(s)</h3>
-            {cartItems.map((item: CartItem, index: number) => {
+            {cartItems.map((item: Product, index: number) => {
               return <OrderItems key={index} Items={item} />;
             })}
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
 // import { Button } from "../ui/button"
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -16,6 +16,9 @@ import axios from "axios";
 import { headers } from "next/headers";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
+import Additional_Info from "./Additional_Info";
+import { title } from "process";
+import { HtmlContext } from "next/dist/server/route-modules/pages/vendored/contexts/entrypoints";
 
 const schema = yup.object({
   title: yup.string().min(3).required({ message: "Title is required" }),
@@ -45,17 +48,32 @@ type Inputs = {
   color: string;
   size: string;
   available_Quantity: number;
+  overview: [{ title: string; info: string }];
 };
 const AddProduct = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [files, setFiles] = useState<any>([]);
-  const [des, setDes] = useState<string>("");
-  const [overview, setOverview] = useState<string[]>([]);
-  const HandDesc = () => {
-    const value = des;
-    setOverview([...overview, value]);
-    setDes("");
+  const [overview, setOverview] = useState([{ title: "", info: "" }]);
+  console.log(overview);
+
+  // const handleRoomAmenities = () => {
+  //   setOverview({
+  //     ...overview,
+  //     title: [...overview.title, ""],
+  //   });
+  // };
+
+  // Amenities Input
+  const handleChange = (e: any, i: number) => {
+    const { name, value } = e.target;
+    const overviewVal = [...overview];
+    overviewVal[i][name] = value;
+    setOverview(overviewVal);
+  };
+  const HandleClick = () => {
+    setOverview([...overview, { title: "", info: "" }]);
+    // setDes("");
   };
 
   console.log(files);
@@ -158,7 +176,7 @@ const AddProduct = () => {
               htmlFor="slug"
               className="flex flex-col gap-3 px-3 py-1 w-full "
             >
-              <span>Slug</span>
+              <span>Sku</span>
               <Input
                 id="slug"
                 {...register("slug")}
@@ -306,25 +324,14 @@ const AddProduct = () => {
                 </span>
               )}
             </Label>
-            <Label
-              htmlFor="discount"
-              className="flex flex-col gap-3 px-3 py-1 w-full "
-            >
-              <span>overview</span>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="des"
-                  name="des"
-                  type="text"
-                  value={des}
-                  onChange={(e) => setDes(e.target.value)}
-                  className="border-2 focuse:outline-0 fucous:border-0  rounded-lg py-2"
-                />
-                <Button type="button" onClick={HandDesc}>
-                  Add
-                </Button>
-              </div>
-            </Label>
+
+            <div className="w-max border-2 rounded-xl my-4 mx-3">
+              <Additional_Info
+                HandleClick={HandleClick}
+                overview={overview}
+                handleChange={handleChange}
+              />
+            </div>
 
             <div className="flex flex-col  w-full ">
               <Card>
