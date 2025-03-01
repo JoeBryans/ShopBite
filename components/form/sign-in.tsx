@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const schema = yup.object({
   email: yup.string().min(3).required({ message: "Email is required" }),
@@ -19,6 +20,7 @@ type Inputs = {
   password: string;
 };
 const SignIn = () => {
+  // const [error, setErrors] = useState(null);
   const router = useRouter();
   const {
     register,
@@ -36,7 +38,10 @@ const SignIn = () => {
       if (res?.ok) {
         router.push("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      // setErrors(error);
+      console.log(error);
+    }
   };
 
   return (

@@ -113,8 +113,8 @@ model Order {
   total_price     Int
   orderItem       Json
   payment         Payment[]
-  paymentStatus   String?
-  deliveryStatus  String?
+  paymentStatus   String?   @default("pending")
+  deliveryStatus  String?   @default("pending")
   paymentIntentId String?   @unique
   createAt        DateTime  @default(now())
 }

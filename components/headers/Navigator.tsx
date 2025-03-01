@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import NavBar from "./NavBar";
 import { CartBar } from "./cartbar";
 import { Heart } from "lucide-react";
 import Searchs from "./Search";

@@ -1,15 +1,12 @@
 "use client";
 import Image from "next/image";
-import { it } from "node:test";
-import { AddButton, DeleteButton, RemoveButton } from "../Cart/cartButton";
-import { Button } from "../ui/button";
 import { Product } from "@/typing";
 type Props = {
   Items: Product;
 };
 const OrderItems = ({ Items }: Props) => {
   const num = Math.round(Items?.rating);
-  const rate = new Array(num).fill(0);
+  // const rate = new Array(num).fill(0);
   const price = Items.price;
   const totalPrice = Items.qty * price;
 

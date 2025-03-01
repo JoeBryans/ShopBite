@@ -1,7 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -15,7 +12,6 @@ import {
 // import * as FaIcons from "react-icons/fa";
 import CartItems from "./cartItems";
 import Link from "next/link";
-import { ArrowBigLeft } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/hooks/store/store";
 import { ShoppingBasketIcon } from "lucide-react";
@@ -23,7 +19,7 @@ import { Product } from "@/typing";
 // import { CartItem } from "@/hooks/store/cartSlice";
 export function CartBar() {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
-  const total = cartItems.reduce((acc, item) => acc + item.qty, 0);
+  // const total = cartItems.reduce((acc, item) => acc + item.qty, 0);
   // const total=cartItems.reduce((acc,item)=>{
   //   return acc+Number(item.qty)*Number(item.price)
   // },0)

@@ -9,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChevronDown } from "lucide-react";
 
 function Categories({ handleCategory }: any) {
   // const handleChange = (value: string) => {

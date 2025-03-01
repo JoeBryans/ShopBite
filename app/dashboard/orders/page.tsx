@@ -1,10 +1,14 @@
 import Container from "@/components/Container";
 import { Order } from "@/Request/request";
+import { Orders } from "@/typing";
+import { User2 } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const page = async () => {
   const data = await Order();
-  console.log(data);
+  const orders = data?.order;
+  console.log(data?.order);
   return (
     <div>
       <Container>
@@ -15,9 +19,7 @@ const page = async () => {
               <thead>
                 <tr>
                   <th>user</th>
-                  <th>Image</th>
                   <th>Name</th>
-                  <th>Category</th>
                   <th>Price</th>
                   <th>OrderId</th>
                   <th>PaymentId</th>
@@ -28,51 +30,49 @@ const page = async () => {
               </thead>
               <tbody className="relative">
                 {/* row 1 */}
-                {[1, 2, 3, 4, 5].map((item: number, index: number) => {
+                {orders.map((item: Orders, index: number) => {
                   return (
                     <>
                       <tr key={index} className="h-20 py-2 ">
                         <td>
                           <div className="flex items-center gap-3">
                             <div className="avatar">
-                              <div className="mask mask-squircle h-12 w-12">
-                                <img
-                                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                  alt="Avatar Tailwind CSS Component"
-                                />
-                              </div>
+                              {item.user.image === null ? (
+                                <div className="mask mask-squircle h-12 w-12">
+                                  <User2 />
+                                </div>
+                              ) : (
+                                <>
+                                  <Image
+                                    src={item.user.image}
+                                    alt={item.user.image}
+                                    width={100}
+                                    height={100}
+                                  />
+                                </>
+                              )}
                             </div>
                           </div>
                         </td>
                         <td>
-                          <div className="flex items-center gap-3">
-                            <div className="avatar">
-                              <div className="mask mask-squircle h-12 w-12">
-                                <img
-                                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                  alt="Avatar Tailwind CSS Component"
-                                />
-                              </div>
-                            </div>
-                          </div>
+                          <span>{item.user.name}</span>
                         </td>
                         <td>
-                          Iphone 16 Pro Max
+                          <span>{item.total_price}</span>
                           <br />
                           {/* short description */}
-                          <span className="badge badge-ghost badge-sm">
-                            Desktop Support Technician
-                          </span>
-                        </td>
-                        <td>Apple</td>
-                        <td>
-                          <span className="">details</span>
                         </td>
                         <td>
-                          <span className="">$ 2,600,000</span>
+                          <span>{item.id}</span>
                         </td>
                         <td>
-                          <span className="">$ 3,600,000</span>
+                          <span className="">{item.paymentIntentId}</span>
+                        </td>
+                        <td>
+                          <span className="">{item.paymentStatus}</span>
+                        </td>
+                        <td>
+                          <span className="">{item.deliveryStatus}</span>
                         </td>
                         <td>
                           <span className="">paid</span>

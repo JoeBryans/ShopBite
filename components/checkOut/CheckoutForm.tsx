@@ -1,4 +1,4 @@
-import { AddressElement, PaymentElement } from "@stripe/react-stripe-js";
+import { PaymentElement } from "@stripe/react-stripe-js";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 import { Button } from "../ui/button";

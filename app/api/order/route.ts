@@ -57,7 +57,11 @@ export async function POST(req: Request) {
 export async function GET() {
 
   try {
-    const order = await db.order.findMany({ });
+    const order = await db.order.findMany({ 
+      include: {
+        user:true
+      }
+    });
     const orderAggregates =await orderAggregate();
     return NextResponse.json({order,orderAggregates});
   } catch (error) {

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-import { AddButton, RemoveButton } from "../Cart/cartButton";
 import { Product } from "@/typing";
 import Qty from "@/app/product/[productId]/Qty";
 type Props = {

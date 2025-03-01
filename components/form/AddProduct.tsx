@@ -1,24 +1,17 @@
 "use client";
-import { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 // import { Button } from "../ui/button"
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { IKUpload } from "imagekitio-next";
-import ImageKitProviders from "../ImageKit";
 // import Uploader from "../Uploader";
-import ImageButton from "./imageUpload";
 import { UploadButton } from "../Uploader";
 import axios from "axios";
-import { headers } from "next/headers";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import Additional_Info from "./Additional_Info";
-import { title } from "process";
-import { HtmlContext } from "next/dist/server/route-modules/pages/vendored/contexts/entrypoints";
 
 const schema = yup.object({
   title: yup.string().min(3).required({ message: "Title is required" }),
@@ -36,6 +29,9 @@ const schema = yup.object({
   brand: yup.string().min(3),
   // password:yup.string().min(10).required({message:"Password is required"})
 });
+type image = {
+  url: string;
+};
 
 type Inputs = {
   title: string;
@@ -53,7 +49,7 @@ type Inputs = {
 const AddProduct = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [files, setFiles] = useState<any>([]);
+  const [files, setFiles] = useState<any>({ url: "" });
   const [overview, setOverview] = useState([{ title: "", info: "" }]);
   console.log(overview);
 
@@ -65,7 +61,7 @@ const AddProduct = () => {
   // };
 
   // Amenities Input
-  const handleChange = (e: any, i: number) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     const { name, value } = e.target;
     const overviewVal = [...overview];
     overviewVal[i][name] = value;
@@ -77,7 +73,7 @@ const AddProduct = () => {
   };
 
   console.log(files);
-  const image: any = [];
+  const image: image[] = [];
   console.log(image);
   for (let index = 0; index < files.length; index++) {
     const { url } = files[index];
@@ -119,6 +115,7 @@ const AddProduct = () => {
         }
       );
       console.log(res);
+      router.push("/dashboard/products");
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -358,7 +355,7 @@ const AddProduct = () => {
 
               {image.length > 0 ? (
                 <div className="flex gap-2 items-center w-full rounded-lg border-gray-300 p-2">
-                  {image.map((item: any, index: number) => {
+                  {image.map((item: image, index: number) => {
                     return (
                       <img
                         src={item.url}

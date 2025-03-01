@@ -21,7 +21,10 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const GetUser = ({ role }: any) => {
+type Props = {
+  role: string;
+};
+const GetUser = ({ role }: Props) => {
   const { data, status } = useSession();
   const path = usePathname();
   console.log(path);

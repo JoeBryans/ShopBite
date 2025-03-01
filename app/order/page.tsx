@@ -18,8 +18,8 @@ const page = () => {
   );
   let orderItems = [];
   for (let index = 0; index < cartItems.length; index++) {
-    const { title, price, category, image, qty, id } = cartItems[index];
-    orderItems.push({ title, price, category, image, qty, id });
+    const { title, price, category, images, qty, id } = cartItems[index];
+    orderItems.push({ title, price, category, images, qty, id });
   }
   const shippingAddress = useSelector(
     (state: RootState) => state.cart.shippinInfo

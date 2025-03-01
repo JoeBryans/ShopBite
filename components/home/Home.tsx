@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Allproduct } from "./../../Request/request";
-import { log } from "console";
 import Image from "next/image";
 import Link from "next/link";
 import { AddButton } from "../Cart/cartButton";
 import { Product } from "@/typing";
 import axios from "axios";
 
-const Home = ({ category }: any) => {
+const Home = ({ category }: Product) => {
   const [product, setProduct] = useState<Product[] | null>(null);
   console.log("category:", category);
 
